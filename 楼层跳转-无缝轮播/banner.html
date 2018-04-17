@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>无缝轮播</title>
+        <style>
+            *{
+                margin:0;padding:0;
+                list-style:none;
+            }
+            .box{
+                width:1200px;height:200px;
+                margin: 0 auto;
+                border:1px solid red;
+                position:relative;
+            }
+            .innerbox{
+                width:830px;height:100%;
+                margin:0 auto;
+                background:#ccc;
+                overflow:hidden;
+            }
+            .innerbox ul{
+                width:1050px;height:200px;
+            }
+            .innerbox ul li{
+                width:200px;height:200px;
+                margin-right:10px;
+                float:left;
+                text-align:center;
+                line-height:200px;
+            }
+            .prev,.next{
+                width:30px;height:60px;
+                background:#33f29c;
+                color:#fff;
+                font-size:20px;
+                text-align:center;
+                line-height:60px;position:absolute;
+                top:50%;
+                margin-top:-30px;
+                cursor:pointer;
+            }
+            .prev{
+                left:90px;
+            }
+            .next{
+                right:90px;
+            }
+        </style>
+
+    </head>
+    <body>
+         <div class="box">
+            <div class="innerbox">
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+                <div class="prev">
+                    <
+                </div>
+                <div class="next">
+                    >
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="animation.js"></script>
+        <script type="text/javascript">
+            var box=document.querySelector('.box');
+            var ul=document.querySelector('ul');
+            var li=ul.children;
+            var prev=document.querySelector('.prev');
+            var next=document.querySelector('.next')
+            var arr=["red","blue","pink","purple","green"];
+            for(var i=0;i<li.length;i++){
+                li[i].style.background=arr[i];
+            }
+
+            //自动轮播
+            var t=setInterval(move,2000);
+            function move(){
+                animate(ul,{marginLeft:-210},function(){
+                    var first=ul.firstElementChild;
+                    ul.appendChild(first);
+                    ul.style.marginLeft=0;
+                    f=true;
+                })
+            }
+
+            // 鼠标经过和离开的效果
+            box.onmouseover=function(){
+                clearInterval(t)
+            }
+            box.onmouseout=function(){
+                t=setInterval(move,3000);
+            }
+            //左右箭头的效果
+            var f=true;
+            next.onclick=function(){
+                if(f){
+                   move();
+                   f=false;
+                }
+            }
+
+            function prevFun(){
+
+                animate(ul,{marginLeft:0},function(){
+                    console.log(this)
+                    var first=ul.firstElementChild;
+                    var last=ul.lastElementChild;
+                    this.style.marginLeft="-210px"
+                    this.insertBefore(last,first);
+                    f1=true;
+                })
+            }
+            var f1=true;
+            prev.onclick=function(){
+                if(f1){
+                    prevFun();
+                    f1=false;
+                }
+            };
+        </script>
+    </body>
+</html>

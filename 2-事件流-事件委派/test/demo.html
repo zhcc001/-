@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件流</title>
+  <style>
+    .box{
+      width:400px;height:400px;
+      background:red;
+      border-radius:50%;
+      margin:50px auto;
+      position:relative;
+    }
+    .innerbox,.smallbox{
+      border-radius:50%;
+      position:absolute;
+      left:0;right:0;top:0;bottom:0;
+      margin:auto;
+    }
+    .innerbox{
+      width:300px;height:300px;
+      background:purple;
+    }
+    .smallbox{
+      width:200px;height:200px;
+      background:#ccc;
+    }
+  </style>
+</head>
+<body>
+    <div class="box">
+      <div class="innerbox">
+        <!-- <div class="smallbox"></div> -->
+      </div>
+    </div>
+    <a href="https://www.baidu.com">百度</a>
+    <script type="text/javascript">
+      var box=document.querySelector(".box");
+      var innerbox=document.querySelector(".innerbox");
+      // var smallbox=document.querySelector(".smallbox");
+      // box.attachEvent("onclick",function(){
+      //   alert("box");
+      // },false)
+      // innerbox.attachEvent("onclick",function(e){
+      //   var ev=e||window.event;
+      //   alert("innerbox");
+      //   ev.stopPropagation();
+      //   ev.cancelBubble=true;
+      //ev.stopPropagetion?ev.stopPropagation():ev.cancelBubble=true;
+      // },false)
+      // smallbox.addEventListener("click",function(){
+      //   alert("smallbox");
+      // },true)
+
+
+      //阻止事件流
+      //阻止浏览器的默认行为
+        var a=document.querySelector("a");
+        a.onclick=function(e){
+          console.log(1)
+          var ev=e||window.event;
+          // ev.preventDefault();
+          // ev.returnValue=false;
+          ev.preventDefault?ev.preventDefault():ev.returnValue=false;//三元表达式实现这个阻止浏览器默认行为兼容
+        }
+    </script>
+</body>
+</html>

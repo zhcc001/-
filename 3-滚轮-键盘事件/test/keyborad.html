@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>键盘事件</title>
+</head>
+<body>
+  <input type="text">
+
+  <script>
+     // window.onkeydown=function(e){
+     //   // console.log("今天天气很好")
+     //    var ev=e||window.event;
+     //    var num=ev.keyCode;
+     //    // var str=String.fromCharCode(num);
+     //    // console.log(num)
+     //    if(num==13){
+     //      alert("回车键被按下")
+     //    }
+     // }
+    var text=document.querySelector("input");
+    text.onchange=function(){
+      //获得焦点并且内容改变
+      var val=text.value;
+      // console.log(val)
+      val=val.slice(0,10);
+      text.value=val;
+    }
+  </script>
+</body>
+</html>

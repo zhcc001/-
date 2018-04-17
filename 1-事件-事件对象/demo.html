@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>事件</title>
+        <style type="text/css">
+            div{
+                width:200px;height:200px;
+                background:red;
+            }
+        </style>
+    </head>
+    <body>
+        <div></div>
+        <script type="text/javascript" src="../../function.js"></script>
+        <script type="text/javascript">
+            var box=document.querySelector("div");
+            // var length=100;
+            // box.onclick=function(e){
+            //     //事件处理程序
+            //     this.style.background="blue";
+            // }
+            // box.onclick=null;
+            //写了一个事件
+            //box 事件源
+            //onclick 事件
+            //e 事件对象---》函数一创建，事件对象e自动生成--》记录事件的信息
+            //
+            //
+//添加事件的形式--》事件监听 
+              //obj.addEventListener(event,function(){},false||true);
+                //obj  事件源
+                //addEventListener（）添加事件的形式
+                //event 事件  click mousedown mouseup mousemove
+                //function(){} 事件处理程序
+                //false||true 事件流 默认是false
+                    //false 冒泡型事件
+                    //true  捕获型事件
+            // box.addEventListener("mouseover",function(){
+            //     this.innerHTML="hello world"
+            // },false)
+            // // box.addEventListener("mouseout",function(){
+            // //     this.innerHTML=""
+            // // })
+            // box.removeEventListener("mouseover",function(){
+            //     this.innerHTML="hello world"
+            // },false)
+
+            //事件监听是有兼容性的
+            // function aa(){
+            //    box.style.background="blue"; 
+            // }
+            // box.attachEvent("onclick",aa)
+            // box.detachEvent("onclick",aa)
+            // 
+            // 
+            // 
+            // 
+        // 总结 事件监听（添加  删除）
+            //现代浏览器的添加 删除
+            // function handle(){
+            //     this.style.background="blue";
+            // }
+            // box.addEventListener("click",handle,false);//"click"事件 aa回调函数 false 事件流（冒泡型事件）
+            // box.removeEventListener("click",handle,false)
+
+            //ie8  事件监听的添加和删除
+                // function handler(){
+                //     box.style.background="pink";
+                // }
+                // addEvent(box,"click",handler);
+                // removeEvent(box,"click",handler)
+        //添加事件的on和事件监听有何区别？
+            // box.onclick=function(){
+            //     this.style.background="blue";
+            // } 
+            // box.onclick=function(){
+            //     this.innerHTML="今天天气很好"
+            // }
+            function aa(){
+                this.style.background="blue";
+            }
+            function bb(){
+                this.innerHTML="今天的天气很好"
+            }
+
+
+
+            
+            addEvent(box,"click",aa)
+            addEvent(box,"click",bb)
+
+            //on   同一个事件作用于同一个元素，作用只起一次
+            //事件监听 同一个元素可以添加多个事件
+        </script>
+    </body>
+</html>

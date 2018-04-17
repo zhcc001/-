@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件委派</title>
+  <style media="screen">
+    .box{
+      width:400px;
+      height:400px;
+      border:1px solid red;
+      margin:50px auto;
+    }
+    .item{
+      width:20px;height:20px;
+      background:black;
+      margin: 0 1px 1px 0;
+      float:left;
+    }
+    button{
+      display: block;
+      margin:0 auto;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+  <button>Add</button>
+  <script src="jquery.js"></script>
+  <script type="text/javascript">
+      //点击每一个小黑块，然后变色
+      var box=document.querySelector(".box");
+      var item=document.querySelectorAll(".item");
+      var add=document.querySelector("button");
+      for(var i=0;i<item.length;i++){
+        item[i].onclick=function(){
+          this.style.background="pink";
+        }
+      }
+      //点击添加按钮每一次 生成20个div 类名item
+      add.onclick=function(){
+        for(var j=0;j<20;j++){
+          var div=document.createElement("DIV");
+          div.className="item";
+          box.appendChild(div);
+        }
+      }
+      //我们生成的div身上的就没有这个事件---事件委派来解决
+      // box.onclick=function(e){
+      //   //事件对象e记录了这个事件的全部信息
+      //   // console.log(e)
+      //   var ev=e||window.event;//事件对象兼容
+      //   var target=ev.target||ev.srcElement;//直接事件源兼容
+      //   if(target.className=="item"){
+      //     target.style.background="pink";
+      //   }
+      // }
+      console.log($(".box"))
+      $(".box").on("click",".item",function(){
+        $(this).css({
+          background:"blue"
+        })
+      })
+  </script>
+</body>
+</html>

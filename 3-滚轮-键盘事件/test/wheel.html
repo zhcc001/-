@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>滚轮事件</title>
+  <style>
+    div{
+      width:200px;height:200px;
+      background:red;
+    }
+  </style>
+</head>
+<body>
+    <div>今天心情不错</div>
+    <script>
+      //获取
+      var box=document.querySelector("div");
+      var l=4;
+      box.addEventListener("DOMMouseScroll",function(e){
+        var ev=e||window.event;
+        var w=box.offsetWidth;
+        var h=box.offsetHeight;
+        if(ev.detail>0){
+            w+=l;h+=l;
+        }
+        if(ev.detail<0){
+          w-=l;h-=l;
+        }
+        console.log(w,h)
+        box.style.width=w+"px";
+        box.style.height=h+"px";
+        console.log(e)
+      })
+    </script>
+</body>
+</html>

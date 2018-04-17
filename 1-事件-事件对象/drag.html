@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>div拖动</title>
+  <style>
+      *{
+        margin:0;padding:0;
+      }
+      div{
+        width:100px;height:100px;
+        background:red;
+        color:white;
+        text-align:center;
+        line-height:100px;
+        font-size:16px;
+        cursor:pointer;
+        position:fixed;
+        left:0;top:0;
+      }
+  </style>
+</head>
+<body>
+    <div class="box">
+      拖动的盒子
+    </div>
+    <script type="text/javascript">
+      var box=document.querySelector("div");
+      // box.onclick=function(e){
+      //   var ev=e||window.event;//兼容性的获取事件对象
+      //   console.log(ev)
+      // }
+      function getWindow(){
+         document.documentElement.scrollTop=1;
+         if(document.documentElement.scrollTop==1){
+           return document.documentElement;
+         }else{
+           return document.body;
+         }
+      }
+      var winDow=getWindow();//可视窗口
+      // console.log(winDow);
+      //可视窗口的宽高
+      var wWidth=document.documentElement.clientWidth;
+      var wHeight=document.documentElement.clientHeight;
+      // console.log(wWidth,wHeight)
+      //dom元素的宽高
+      var boxWidth=box.offsetWidth;
+      var boxHeight=box.offsetHeight;
+      // console.log(boxWidth,boxHeight)
+      //盒子的最大临界值
+      var maxLeft=wWidth-boxWidth;
+      var maxTop=wHeight-boxHeight;
+      // console.log(maxLeft,maxTop)
+      box.onmousedown=function(e){//鼠标按下的事件
+          var ev=e||window.event;//兼容性的获取事件对象
+          var ox=e.offsetX;
+          var oy=e.offsetY;
+          console.log(ox,oy)
+          //速度过快的时候，鼠标和盒子脱离---父级docuemnt
+          document.onmousemove=function(e){
+              var ev=e||window.event;
+              var cx=e.clientX;
+              var cy=e.clientY;
+              var left=cx-ox;
+              var top=cy-oy;
+              if(left<=0){
+                left=0;
+              }
+              if(left>maxLeft){
+                left=maxLeft;
+              }
+              if(top<=0){
+                top=0;
+              }
+              if(top>maxTop){
+                top=maxTop;
+              }
+              box.style.left=left+'px';
+              box.style.top=top+'px';
+          }
+          box.onmouseup=function(){
+            document.onmousemove=null;
+          }
+      }
+    </script>
+</body>
+</html>

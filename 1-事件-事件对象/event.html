@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件</title>
+  <style>
+      div{
+        width:200px;height:200px;
+        background:red;
+      }
+  </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        var box=document.querySelector("div");
+
+        box.onclick=function(e){
+            console.log(e)
+            //e 事件对象 鼠标事件的一切
+          //有兼容性
+           var ev=e||window.event;
+        }
+        //box   事件源
+        //on    添加事件的一种形式
+        // click    事件名称
+        //{}     事件处理程序
+    </script>
+</body>
+</html>

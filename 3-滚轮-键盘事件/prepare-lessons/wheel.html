@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>滚轮事件</title>
+  <style>
+    .box{
+      width:200px;height:200px;
+      background:red;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <script type="text/javascript">
+    var box=document.querySelector(".box");
+    var l=4;
+    document.onmousewheel=function(e){
+      var ev=e||window.event;
+      console.log(ev)
+      // var w=box.offsetWidth;
+      // w+=l;
+      // box.style.width=w+"px";
+    }
+    // window.addEventListener("DOMMouseScroll",function(e){
+    //   console.log(e)
+    // })
+  </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+ <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>楼层跳转</title>
+        <style>
+            *{
+                margin:0;padding:0;
+                list-style:none;
+            }
+            .imgbox{width:1200px;margin:0 auto;border:1px solid red;
+            }
+            .imgbox li{width:1200px;height:600px;text-align:center;line-height:400px;font-size:48px;color:#fff;margin-bottom:50px;
+            }
+            .btnbox{width:30px;position:fixed;top:300px;left:50%;margin-left:-640px;display: none;
+            }
+            .btnbox li{width:30px;height:30px;margin-bottom:10px;text-align:center;line-height:30px;color:white;font-size:20px;border:1px solid red;cursor:pointer;
+              }
+              .rTop{width:30px;position:fixed;right:10px;bottom:20px;background:red;text-align:center;color:#fff;padding:4px 0;cursor:pointer;
+              }
+        </style>
+    </head>
+    <body>
+        <ul class="imgbox">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <ul class="btnbox">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <div class="rTop">
+            返回
+        </div>
+        <script type="text/javascript" src="animation.js"></script>
+        <script type="text/javascript">
+
+            var imgbox=document.querySelector('.imgbox');
+            var btnbox=document.querySelector('.btnbox');
+            var btn=btnbox.children;
+            var floor=imgbox.children;
+            var arr=["red","blue","pink","purple","green"];
+            for(var i=0;i<floor.length;i++){
+                floor[i].style.background=arr[i];
+                btn[i].style.background=arr[i];
+            }
+            var windows=getWindow();
+            console.log(windows)
+            function getWindow(){
+                document.documentElement.scrollTop=1;
+                if(document.documentElement.scrollTop==1){
+                    return document.documentElement
+                }else{
+                    return document.body;
+                }
+            }
+            for(var j=0;j<btn.length;j++){
+                btn[j].index=j;
+                btn[j].onclick=function(){
+                    var newtop=floor[this.index].offsetTop;
+                    console.log(newtop)
+                    animate(windows,{scrollTop:newtop})
+                }
+            }
+            //左侧按钮的显示和隐藏
+                windows.onscroll=function(){
+                    var newScrollTop=windows.scrollTop;
+                    console.log(newScrollTop)
+                    if(newScrollTop>=0&&newScrollTop<=1000){
+                        btnbox.style.display="none"
+                    }else{
+                        btnbox.style.display="block";
+                    }
+                }
+
+            var returnTop=document.querySelector('.rTop');
+            returnTop.onclick=function(){
+                animate(windows,{scrollTop:0})
+            }
+            console.log(floor);
+
+            
+            function getWindow(){
+                document.documentElement.scrollTop=1;
+                if(document.documentElement.scrollTop==1){
+                    return document.documentElement
+                }else{
+                    return document.body;
+                }
+            }
+            console.log(getWindow())
+      </script>
+    </body>
+</html>

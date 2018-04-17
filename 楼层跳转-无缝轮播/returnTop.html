@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body{
+      height:2000px;
+      position:relative;
+    }
+    div{
+      width:50px;height:50px;
+      background:red;
+      position:absolute;
+      right:0;bottom:0;
+    }
+  </style>
+</head>
+<body>
+    <div></div>
+    <script src="animation.js"></script>
+    <script src="../../function.js"></script>
+    <script>
+        var rTop=document.querySelector("div");
+        console.log(getStyle(rTop,"width"))
+
+        var winDow=getWindow();
+        // console.log(winDow.scrollTop)
+
+
+        rTop.onclick=function(){
+          //可视窗口的scrollTop=0
+          //使用形式和jquery中的animate一样
+          animate(winDow,{scrollTop:0})
+        }
+
+
+
+
+
+
+        //兼容性去获取可视窗口document.body       document.documentElement
+
+          function getWindow(){
+             document.documentElement.scrollTop=1;//scrollTop一般可是窗口使用较多
+             if(document.documentElement.scrollTop==1){
+               return document.documentElement;//火狐 IE
+             }else{
+               return document.body;//谷歌
+             }
+          }
+
+
+    </script>
+</body>
+</html>
